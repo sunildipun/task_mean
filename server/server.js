@@ -22,7 +22,7 @@ mongoose.connect('mongodb://localhost:27017/taskManagement');
 
 app.post('/tasks',function (req, res) {
     // console.log(req.body);
-    
+
     var taskNew = new Task({
         name : req.body.name,
         description : req.body.description,
@@ -53,6 +53,14 @@ app.post('/tasks',function (req, res) {
     // })
 });
 
+
+app.get('/tasks',(req, res)=>{
+    Task.find().then((tasks)=>{
+        res.send({tasks});
+    },(e)=>{
+        res.status(400).send(e);
+    })
+})
 // app.use(cors());
 // app.use('/api', router);
 app.listen(port, ()=>{
