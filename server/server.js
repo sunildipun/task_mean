@@ -1,6 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var cors = require('cors');
+
 var {ObjectID} = require('mongodb');
 
 var app = express();
@@ -83,8 +84,6 @@ app.get('/tasks/:id',(req, res)=>{
         res.status(400).send(e);
     })
 
-    
-    // res.send(req.params);
 })
 
 
@@ -95,6 +94,7 @@ app.post('/user',(req, res)=>{
     var user = new User({
         name: req.body.name,
         email: req.body.email,
+        password: req.body.password,
         address: req.body.address,
         number: req.body.number,
         role: req.body.role,
