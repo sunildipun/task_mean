@@ -90,21 +90,22 @@ app.get('/tasks/:id',(req, res)=>{
 
 //  User Post
 app.post('/user',(req, res)=>{
-    console.log('User', req.body);
-    var user = new User({
-        name: req.body.name,
-        email: req.body.email,
-        password: req.body.password,
-        address: req.body.address,
-        number: req.body.number,
-        role: req.body.role,
-    });
+    console.log('User',req.body);
 
-    user.save().then((doc)=>{
-        res.send(doc);
-    },(e)=>{
-        res.status(400).send(e);
-    })
+    // var user = new User({
+    //     name: req.body.name,
+    //     email: req.body.email,
+    //     password: req.body.password,
+    //     address: req.body.address,
+    //     number: req.body.number,
+    //     role: req.body.role,
+    // });
+
+    // user.save().then((doc)=>{
+    //     res.send(doc);
+    // },(e)=>{
+    //     res.status(400).send(e);
+    // })
 })
 // app.use(cors());
 // app.use('/api', router);
