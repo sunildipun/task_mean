@@ -19,11 +19,18 @@ var port = process.env.PORT || 5000;
 
 mongoose.connect('mongodb://localhost:27017/taskManagement');
 
+app.all("/*", function(req, res, next){
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+    next();
+  });
+
 
 // Creating Task 
 
 app.post('/tasks',function (req, res) {
-    // console.log(req.body);
+    console.log(req.body);
 
     var taskNew = new Task({
         name : req.body.name,
@@ -92,22 +99,22 @@ app.get('/tasks/:id',(req, res)=>{
 app.post('/user',(req, res)=>{
     console.log('User',req.body);
 
-    // var user = new User({
-    //     name: req.body.name,
-    //     email: req.body.email,
-    //     password: req.body.password,
-    //     address: req.body.address,
-    //     number: req.body.number,
-    //     role: req.body.role,
-    // });
+    var user = new User({
+        name: req.body.name,
+        email: req.body.email,
+        password: req.body.password,
+        address: req.body.address,
+        number: req.body.number,
+        role: req.body.role,
+    });
 
-    // user.save().then((doc)=>{
-    //     res.send(doc);
-    // },(e)=>{
-    //     res.status(400).send(e);
-    // })
+    user.save().then((doc)=>{
+        res.send(doc);
+    },(e)=>{
+        res.status(400).send(e);
+    })
 })
-// app.use(cors());
+app.use(cors());
 // app.use('/api', router);
 app.listen(port, ()=>{
     console.log('Task Management is runnning at ' + port);
